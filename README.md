@@ -1,16 +1,20 @@
-# projeto_gestao_financas
+# Projeto Gestão de Finanças 
 
-A new Flutter project.
+Projeto realizado como atividade da disciplina de Programação para Dispositivos Móveis e sem fio componenete curricular do curso superior de Tecnologia em Análise e Desenvolvimento de Sistemas, oferecida pelo Instituto Federal de Educação, Ciência e Tecnologia Baiano Campus-Guanambi e ministrada pelo professor Webber de Sousa Fantini. 
+O projeto esta sendo desenvolvido pelos desenvolvedores, Álex Silva Costa, Luísa Mel Almeida Martins e Wilton Silva Rodrigues.
 
-## Getting Started
+## Descriçaõ do projeto 
 
-This project is a starting point for a Flutter application.
+Um sistema de gestão de finanças pessoais em Flutter, tendo como ideia principal um **painel inicial (dashboard)** que apresenta ao usuário o saldo atual, os valores de entradas e saídas, além de um resumo gráfico das movimentações. O usuário poderia cadastrar **despesas e receitas** com categorias (alimentação, transporte, lazer etc.), possibilitando um acompanhamento organizado dos gastos. Além disso, o sistema teria uma área dedicada a um **agente de inteligência artificial**, responsável por analisar os hábitos financeiros registrados e oferecer **sugestões de economia personalizadas**, como alertas de gastos excessivos em determinada categoria ou recomendações para guardar uma porcentagem da renda mensal. O objetivo principal seria combinar um aplicativo prático de registro de finanças com um apoio inteligente que ajude o usuário a **melhorar sua saúde financeira**.
 
-A few resources to get you started if this is your first Flutter project:
+## Objetivos do projeto 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Registrar e organizar transações (receitas/despesas) com categorias, contas e tags.
+    
+- Mostrar dashboard claro com saldo, entradas/saídas e gráficos de tendências.
+    
+- Detectar padrões de gasto e anomalias; gerar sugestões de economia personalizadas.
+    
+- Manter dados seguros, dando controle ao usuário (export, apagar, anonimizar).
+    
+- MVP: funcionalidade de registro + dashboard + assistente de sugestões básicas.
