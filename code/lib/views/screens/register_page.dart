@@ -1,57 +1,51 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
+  final _nameCtrl = TextEditingController();
+  final _emailCtrl = TextEditingController();
+  final _passCtrl = TextEditingController();
+  final _confirmCtrl = TextEditingController();
   bool _obscure = true;
+
+  @override
+  void dispose() {
+    _nameCtrl.dispose();
+    _emailCtrl.dispose();
+    _passCtrl.dispose();
+    _confirmCtrl.dispose();
+    super.dispose();
+  }
+
+  void _submit() {
+    // Aqui você pode adicionar validação e lógica de criação de conta.
+    // Por enquanto apenas volta à tela de login.
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Criar conta'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        foregroundColor: scheme.primary,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 36),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
           child: Column(
             children: [
-              const SizedBox(height: 18),
-              // Logo
-              Container(
-                width: 82,
-                height: 82,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [scheme.primary, scheme.primaryContainer],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: const Icon(Icons.account_balance, size: 44, color: Colors.white),
-              ),
-              const SizedBox(height: 18),
-              Text(
-                'Cash',
-                style: TextStyle(
-                  fontSize: 34,
-                  fontWeight: FontWeight.w800,
-                  color: scheme.primary,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                'Gerencie seus gastos',
-                style: TextStyle(color: Colors.white.withOpacity(0.75)),
-              ),
-              const SizedBox(height: 28),
-
-              // Card with form
+              const SizedBox(height: 8),
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
@@ -69,21 +63,33 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Login', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white.withOpacity(0.95))),
+                    Text('Crie sua conta', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white.withOpacity(0.95))),
                     const SizedBox(height: 16),
+                    const Text('Nome', style: TextStyle(fontSize: 14)),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: _nameCtrl,
+                      decoration: const InputDecoration(
+                        hintText: 'Seu nome',
+                        prefixIcon: Icon(Icons.person_outline),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
                     const Text('Email', style: TextStyle(fontSize: 14)),
                     const SizedBox(height: 8),
                     TextField(
+                      controller: _emailCtrl,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'seu@email.com',
-                        prefixIcon: const Icon(Icons.email_outlined),
+                        prefixIcon: Icon(Icons.email_outlined),
                       ),
                     ),
                     const SizedBox(height: 12),
                     const Text('Senha', style: TextStyle(fontSize: 14)),
                     const SizedBox(height: 8),
                     TextField(
+                      controller: _passCtrl,
                       obscureText: _obscure,
                       decoration: InputDecoration(
                         hintText: '••••••••',
@@ -94,9 +100,18 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 12),
+                    const Text('Confirmar senha', style: TextStyle(fontSize: 14)),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: _confirmCtrl,
+                      obscureText: _obscure,
+                      decoration: const InputDecoration(
+                        hintText: '••••••••',
+                        prefixIcon: Icon(Icons.lock_outline),
+                      ),
+                    ),
                     const SizedBox(height: 18),
-
-                    // Entrar button
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -110,9 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                           backgroundColor: MaterialStateProperty.all(Colors.transparent),
                           elevation: MaterialStateProperty.all(0),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacementNamed('/home');
-                        },
+                        onPressed: _submit,
                         child: Ink(
                           decoration: BoxDecoration(
                             gradient: LinearGradient(colors: [const Color(0xFFF97316), const Color(0xFFFFA552)]),
@@ -121,26 +134,22 @@ class _LoginPageState extends State<LoginPage> {
                           child: Container(
                             alignment: Alignment.center,
                             constraints: const BoxConstraints(minHeight: 48),
-                            child: const Text('Entrar', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                            child: const Text('Criar conta', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                           ),
                         ),
                       ),
                     ),
-
                     const SizedBox(height: 12),
                     Center(
                       child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/register');
-                        },
+                        onPressed: () => Navigator.of(context).pop(),
                         style: TextButton.styleFrom(foregroundColor: Colors.white70),
-                        child: const Text('Não tem conta? Crie agora', style: TextStyle(decoration: TextDecoration.underline)),
+                        child: const Text('Já tem conta? Entrar', style: TextStyle(decoration: TextDecoration.underline)),
                       ),
                     ),
                   ],
                 ),
               ),
-
               const SizedBox(height: 22),
               Text('Seus dados estão seguros e criptografados', style: TextStyle(color: Colors.white.withOpacity(0.6))),
             ],
