@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../controllers/auth_controller.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -13,6 +14,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _passCtrl = TextEditingController();
   final _confirmCtrl = TextEditingController();
   bool _obscure = true;
+  bool _loading = false;
 
   @override
   void dispose() {
@@ -23,10 +25,39 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
-  void _submit() {
-    // Aqui você pode adicionar validação e lógica de criação de conta.
-    // Por enquanto apenas volta à tela de login.
-    Navigator.of(context).pop();
+  Future<void> _submit() async {
+    final nome = _nameCtrl.text.trim();
+    final email = _emailCtrl.text.trim();
+    final senha = _passCtrl.text;
+    final confirm = _confirmCtrl.text;
+
+    print('[RegisterPage] trying register nome="$nome" email="$email"');
+
+    if (nome.isEmpty || email.isEmpty || senha.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Preencha todos os campos')));
+      return;
+    }
+    if (senha != confirm) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Senhas não conferem')));
+      return;
+    }
+
+    setState(() => _loading = true);
+    try {
+      final id = await AuthController.instance.register(nome: nome, email: email, senha: senha);
+      print('[RegisterPage] registro ok id=$id');
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Conta criada com sucesso')));
+      Navigator.of(context).pop();
+    } on Exception catch (e) {
+      print('[RegisterPage] register error: $e');
+      if (e.toString().contains('email_exists')) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Email já cadastrado')));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Erro ao criar conta')));
+      }
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
   }
 
   @override
@@ -115,28 +146,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
+                        onPressed: _loading ? null : _submit,
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                          backgroundColor: null,
-                          elevation: 8,
-                          shadowColor: Colors.black,
-                        ).copyWith(
-                          backgroundColor: MaterialStateProperty.all(Colors.transparent),
-                          elevation: MaterialStateProperty.all(0),
                         ),
-                        onPressed: _submit,
-                        child: Ink(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [const Color(0xFFF97316), const Color(0xFFFFA552)]),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            constraints: const BoxConstraints(minHeight: 48),
-                            child: const Text('Criar conta', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                          ),
-                        ),
+                        child: _loading
+                            ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2))
+                            : const Text('Criar conta', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                       ),
                     ),
                     const SizedBox(height: 12),

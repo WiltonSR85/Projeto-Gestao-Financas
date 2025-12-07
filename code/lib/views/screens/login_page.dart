@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../controllers/auth_controller.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -8,7 +9,42 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _emailCtrl = TextEditingController();
+  final _passCtrl = TextEditingController();
   bool _obscure = true;
+  bool _loading = false;
+
+  @override
+  void dispose() {
+    _emailCtrl.dispose();
+    _passCtrl.dispose();
+    super.dispose();
+  }
+
+  Future<void> _login() async {
+    final email = _emailCtrl.text.trim();
+    final senha = _passCtrl.text;
+    if (email.isEmpty || senha.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Preencha email e senha')));
+      return;
+    }
+
+    setState(() => _loading = true);
+    try {
+      final user = await AuthController.instance.login(email, senha);
+      print('[LoginPage] AuthController.login -> $user');
+      if (user != null) {
+        Navigator.of(context).pushReplacementNamed('/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Credenciais inválidas')));
+      }
+    } catch (e, st) {
+      print('[LoginPage] login error: $e\n$st');
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Erro ao tentar logar')));
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                     const Text('Email', style: TextStyle(fontSize: 14)),
                     const SizedBox(height: 8),
                     TextField(
+                      controller: _emailCtrl,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         hintText: 'seu@email.com',
@@ -84,6 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                     const Text('Senha', style: TextStyle(fontSize: 14)),
                     const SizedBox(height: 8),
                     TextField(
+                      controller: _passCtrl,
                       obscureText: _obscure,
                       decoration: InputDecoration(
                         hintText: '••••••••',
@@ -95,38 +133,19 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 18),
-
-                    // Entrar button
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
+                        onPressed: _loading ? null : _login,
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                          backgroundColor: null,
-                          elevation: 8,
-                          shadowColor: Colors.black,
-                        ).copyWith(
-                          backgroundColor: MaterialStateProperty.all(Colors.transparent),
-                          elevation: MaterialStateProperty.all(0),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacementNamed('/home');
-                        },
-                        child: Ink(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [const Color(0xFFF97316), const Color(0xFFFFA552)]),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            constraints: const BoxConstraints(minHeight: 48),
-                            child: const Text('Entrar', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                          ),
-                        ),
+                        child: _loading
+                            ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2))
+                            : const Text('Entrar', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                       ),
                     ),
-
                     const SizedBox(height: 12),
                     Center(
                       child: TextButton(
@@ -135,6 +154,15 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         style: TextButton.styleFrom(foregroundColor: Colors.white70),
                         child: const Text('Não tem conta? Crie agora', style: TextStyle(decoration: TextDecoration.underline)),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    // botão de debug (remova em produção)
+                    Center(
+                      child: TextButton(
+                        onPressed: () {} /*_debugListUsers*/,
+                        style: TextButton.styleFrom(foregroundColor: Colors.white54),
+                        child: const Text('DEBUG: listar usuários (console)'),
                       ),
                     ),
                   ],
