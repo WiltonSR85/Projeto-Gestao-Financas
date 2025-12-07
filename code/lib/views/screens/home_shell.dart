@@ -3,6 +3,7 @@ import 'home_page.dart';
 import 'profile_page.dart';
 import 'categories_page.dart';
 import 'tools_page.dart';
+import 'chat_page.dart';
 
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key});
@@ -15,9 +16,10 @@ class _HomeShellState extends State<HomeShell> {
   int _index = 0;
   static const pages = [
     HomePage(),
-    ProfilePage(),
+    ChatPage(),
     CategoriesPage(),
     ToolsPage(),
+    ProfilePage(),
   ];
 
   @override
@@ -30,22 +32,14 @@ class _HomeShellState extends State<HomeShell> {
         onDestinationSelected: (i) => setState(() => _index = i),
         destinations: [
           NavigationDestination(icon: Icon(Icons.home_outlined), label: 'Início'),
-          NavigationDestination(icon: Icon(Icons.person_outline), label: 'Perfil'),
+          NavigationDestination(icon: Icon(Icons.chat_outlined), label: 'Chat IA'),
           NavigationDestination(icon: Icon(Icons.category_outlined), label: 'Categorias'),
-          NavigationDestination(icon: Icon(Icons.build_outlined), label: 'Ferramentas'),
+          NavigationDestination(icon: Icon(Icons.account_balance_outlined), label: 'Contas'),
+          NavigationDestination(icon: Icon(Icons.person_outlined), label: 'Perfil'),
+
         ],
         backgroundColor: Colors.black.withOpacity(0.25),
       ),
-
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 70, left: 300),
-        child: FloatingActionButton(
-          onPressed: () => Navigator.of(context).pushNamed('/chat'),
-          tooltip: 'Chat IA',
-          child: const Icon(Icons.chat_bubble_outline),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

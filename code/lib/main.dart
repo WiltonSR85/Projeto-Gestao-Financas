@@ -4,6 +4,7 @@ import 'views/screens/home_shell.dart';
 import 'views/screens/chat_page.dart';
 import 'views/screens/register_page.dart';
 import 'views/theme/app_theme.dart';
+import 'views/screens/profile_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/register': (context) => const RegisterPage(),
         '/home': (_) => const HomeShell(),
         '/chat': (_) => const ChatPage(),
+        '/profile': (_) => const ProfilePage(),
       },
       initialRoute: '/',
     );

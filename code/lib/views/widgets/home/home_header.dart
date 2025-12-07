@@ -45,7 +45,7 @@ class HomeHeader extends StatelessWidget {
           ),
         ]),
         IconButton(
-          onPressed: () {},
+          onPressed: () => Navigator.of(context).pushNamed('/profile'),
           icon: Icon(Icons.person_outline, color: Colors.white70),
         ),
       ],
