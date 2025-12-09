@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
 import 'categories_page.dart';
-import 'tools_page.dart';
+import 'accounts/accounts_page.dart';
 import 'chat_page.dart';
 
 class HomeShell extends StatefulWidget {
@@ -18,7 +18,7 @@ class _HomeShellState extends State<HomeShell> {
     HomePage(),
     ChatPage(),
     CategoriesPage(),
-    ToolsPage(),
+    AccountsPage(),
     ProfilePage(),
   ];
 

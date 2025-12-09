@@ -140,6 +140,26 @@ class DatabaseHelper {
     return res;
   }
 
+  // Inserção de conta (DAO)
+  Future<int> insertConta(Map<String, Object?> row) async {
+    final db = await database;
+    try {
+      final id = await db.insert('conta', row);
+      print('[DatabaseHelper] insertConta id=$id row=$row');
+      return id;
+    } catch (e) {
+      print('[DatabaseHelper] insertConta error: $e');
+      rethrow;
+    }
+  }
+
+  Future<List<Map<String, Object?>>> getAllContas() async {
+    final db = await database;
+    final res = await db.query('conta');
+    print('[DatabaseHelper] getAllContas -> $res');
+    return res;
+  }
+
   // Método de debug: apaga o arquivo do DB (use somente em desenvolvimento)
   Future<void> deleteDatabaseDebug() async {
     final dbPath = await getDatabasesPath();

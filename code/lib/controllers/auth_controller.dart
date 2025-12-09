@@ -48,6 +48,16 @@ class AuthController {
     }
   }
 
+  Future<void> saveUsuarioLogadoId(int id) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('usuario_id', id);
+  }
+
+  Future<int> getUsuarioLogadoId() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('usuario_id') ?? 0;
+  }
+
   /// Tenta fazer login; retorna User se sucesso, null caso credenciais inválidas
   Future<User?> login(String email, String senha) async {
     final nEmail = email.trim().toLowerCase();
@@ -68,11 +78,11 @@ class AuthController {
       print('[AuthController] login: senha inválida para $nEmail');
       return null;
     }
-
     // sucesso: persiste sessão mínima
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('user_email', nEmail);
     await prefs.setString('user_nome', (userMap['nome'] as String?) ?? '');
+    await prefs.setInt('usuario_id', userMap['id_usuario'] as int);
     print('[AuthController] login: sucesso -> $nEmail');
     return User.fromMap(userMap);
   }
