@@ -98,7 +98,7 @@ class _AddAccountModalState extends State<AddAccountModal> {
               tipo: tipo,
               saldoInicial: saldo,
               saldoAtual: saldo,
-              idUsuario: 0, // Defina o idUsuario correto ao chamar o modal!
+              idUsuario: 0, 
             );
             widget.onSave(conta);
             Navigator.of(context).pop();

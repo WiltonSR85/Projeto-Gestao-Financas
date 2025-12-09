@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import '../../widgets/home/home_header.dart';
 import '../../widgets/accounts/account_balance_card.dart';
 import '../../widgets/accounts/total_balance_card.dart';
-import '../../widgets/accounts/transaction_history_card.dart';
 import '../../widgets/accounts/add_account_modal.dart';
 import '/controllers/accounts_controllers.dart/account_controller.dart';
 import '../../../controllers/auth_controller.dart';
-import './account_detail_page.dart'; // Importar a página de detalhes da conta
+import './account_detail_page.dart';
 import '../../../models/account_model.dart';
 
 class AccountsPage extends StatefulWidget {
@@ -74,60 +73,6 @@ class _AccountsPageState extends State<AccountsPage> {
       const Color(0xFF2563EB),
       const Color(0xFFEF4444),
       const Color(0xFF14B8A6),
-    ];
-
-    // Exemplo de lista de transações (substitua por dados reais)
-    final transactions = [
-      TransactionHistoryCard(
-        icon: Icons.attach_money,
-        iconColor: Colors.green,
-        title: 'Salário',
-        date: '04/12/2025',
-        account: 'Conta Corrente',
-        category: 'Trabalho',
-        value: '5000,00',
-        isIncome: true,
-      ),
-      TransactionHistoryCard(
-        icon: Icons.shopping_cart,
-        iconColor: Colors.orange,
-        title: 'Supermercado Extra',
-        date: '03/12/2025',
-        account: 'Conta Corrente',
-        category: 'Alimentação',
-        value: '320,50',
-        isIncome: false,
-      ),
-      TransactionHistoryCard(
-        icon: Icons.local_cafe,
-        iconColor: Colors.orange,
-        title: 'Café Starbucks',
-        date: '02/12/2025',
-        account: 'Cartão de Crédito',
-        category: 'Alimentação',
-        value: '28,90',
-        isIncome: false,
-      ),
-      TransactionHistoryCard(
-        icon: Icons.trending_up,
-        iconColor: Colors.green,
-        title: 'Rendimento',
-        date: '30/11/2025',
-        account: 'Poupança',
-        category: 'Investimentos',
-        value: '340,00',
-        isIncome: true,
-      ),
-      TransactionHistoryCard(
-        icon: Icons.local_gas_station,
-        iconColor: Colors.red,
-        title: 'Combustível',
-        date: '29/11/2025',
-        account: 'Conta Corrente',
-        category: 'Transporte',
-        value: '250,00',
-        isIncome: false,
-      ),
     ];
 
     return SafeArea(
@@ -231,29 +176,6 @@ class _AccountsPageState extends State<AccountsPage> {
               },
             ),
             const SizedBox(height: 18),
-            // Histórico de transações (mantém como está)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Histórico',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                ),
-                Text(
-                  '${transactions.length} transações',
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: 15,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            ...transactions,
           ],
         ),
       ),

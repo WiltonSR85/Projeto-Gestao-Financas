@@ -7,7 +7,7 @@ class AccountBalanceCard extends StatelessWidget {
   final IconData icon;
   final Color color;
   final bool showArrow;
-  final VoidCallback? onTap; // Adicione este parâmetro
+  final VoidCallback? onTap; 
 
   const AccountBalanceCard({
     required this.accountName,
@@ -16,7 +16,7 @@ class AccountBalanceCard extends StatelessWidget {
     required this.icon,
     required this.color,
     this.showArrow = true,
-    this.onTap, // Adicione ao construtor
+    this.onTap, 
     super.key,
   });
 

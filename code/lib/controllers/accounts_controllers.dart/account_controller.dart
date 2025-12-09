@@ -80,4 +80,14 @@ class AccountsController {
     res.first.forEach((key, value) => data[key] = value);
     return ContaModel.fromMap(data);
   }
+
+  Future<void> updateSaldoConta({required int idConta, required double novoSaldo}) async {
+    final db = await DatabaseHelper().database;
+    await db.update(
+      'conta',
+      {'saldo_atual': novoSaldo},
+      where: 'id_conta = ?',
+      whereArgs: [idConta],
+    );
+  }
 }
