@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Card para exibir informações basicas da conta
 class AccountBalanceCard extends StatelessWidget {
   final String accountName;
   final String bankName;
@@ -9,6 +10,7 @@ class AccountBalanceCard extends StatelessWidget {
   final bool showArrow;
   final VoidCallback? onTap; 
 
+  //Construtor da classe
   const AccountBalanceCard({
     required this.accountName,
     required this.bankName,
@@ -20,6 +22,7 @@ class AccountBalanceCard extends StatelessWidget {
     super.key,
   });
 
+  //Contrução do widget
   @override
   Widget build(BuildContext context) {
     return InkWell(

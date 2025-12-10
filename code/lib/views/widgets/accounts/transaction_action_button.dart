@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+// Botão customizado para ações de transação (ex: adicionar receita ou despesa)
 class TransactionActionButton extends StatelessWidget {
-  final String label;
-  final Color color;
-  final IconData icon;
+  final String label;  // Texto do botão (ex: "Adicionar Receita")
+  final Color color;  // Cor de fundo do botão
+  final IconData icon;  // Ícone exibido à esquerda do texto
+  // Função chamada ao pressionar o botão
   final VoidCallback onPressed;
 
   const TransactionActionButton({
@@ -17,17 +19,22 @@ class TransactionActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: double.infinity, // Faz o botão ocupar toda a largura disponível
       child: ElevatedButton.icon(
-        onPressed: onPressed,
-        icon: Icon(icon, size: 22),
-        label: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
+        onPressed: onPressed, // Função chamada ao clicar
+        icon: Icon(icon, size: 22), // Ícone do botão
+        label: Text(
+          label,
+          style: const TextStyle(fontWeight: FontWeight.bold), // Texto em negrito
+        ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(vertical: 18),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-          textStyle: const TextStyle(fontSize: 16),
+          backgroundColor: color, // Cor de fundo do botão
+          foregroundColor: Colors.white, // Cor do texto e ícone
+          padding: const EdgeInsets.symmetric(vertical: 18), // Altura do botão
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14), // Bordas arredondadas
+          ),
+          textStyle: const TextStyle(fontSize: 16), // Tamanho do texto
         ),
       ),
     );

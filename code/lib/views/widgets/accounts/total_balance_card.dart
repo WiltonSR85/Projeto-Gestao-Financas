@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+// Widget para exibir o saldo total de todas as contas e a quantidade de contas
 class TotalBalanceCard extends StatelessWidget {
-  final String totalBalance;
+  final String totalBalance;  // Valor total do saldo (ex: "R$ 5.000,00")
+  // Quantidade de contas cadastradas
   final int accountsCount;
 
   const TotalBalanceCard({
@@ -13,15 +15,17 @@ class TotalBalanceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(24),
-      margin: const EdgeInsets.only(bottom: 18),
+      width: double.infinity, // Ocupa toda a largura disponível
+      padding: const EdgeInsets.all(24), // Espaçamento interno
+      margin: const EdgeInsets.only(bottom: 18), // Espaço abaixo do card
       decoration: BoxDecoration(
+        // Gradiente de cor laranja para o fundo do card
         gradient: const LinearGradient(
           colors: [Color(0xFFF97316), Color(0xFFFFA552)],
         ),
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(22), // Bordas arredondadas
         boxShadow: [
+          // Sombra para dar efeito de elevação
           BoxShadow(
             blurRadius: 18,
             color: Colors.black.withOpacity(0.3),
@@ -30,8 +34,9 @@ class TotalBalanceCard extends StatelessWidget {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start, // Alinha textos à esquerda
         children: [
+          // Título do card
           const Text(
             'Saldo Total',
             style: TextStyle(
@@ -39,7 +44,8 @@ class TotalBalanceCard extends StatelessWidget {
               fontSize: 16,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 8), // Espaço entre título e saldo
+          // Valor do saldo total, destacado
           Text(
             totalBalance,
             style: const TextStyle(
@@ -48,7 +54,8 @@ class TotalBalanceCard extends StatelessWidget {
               fontSize: 32,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 8), // Espaço entre saldo e quantidade de contas
+          // Quantidade de contas cadastradas
           Text(
             '$accountsCount contas',
             style: const TextStyle(
