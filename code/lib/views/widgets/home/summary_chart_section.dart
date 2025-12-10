@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import '/models/transaction_model.dart';
+import '/models/account_model.dart';
 import '../toggle_buttons_widget.dart';
 import '../line_chart_widget.dart';
 import '../legend_dot.dart';
 
 class SummaryChartSection extends StatelessWidget {
-  const SummaryChartSection({super.key});
+  final List<TransactionModel> transacoes;
+  final List<ContaModel> contas;
+
+  const SummaryChartSection({
+    super.key,
+    required this.transacoes,
+    required this.contas,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +36,28 @@ class SummaryChartSection extends StatelessWidget {
                   color: Colors.white.withOpacity(0.95),
                 ),
               ),
-              ToggleButtonsWidget(),
+              const ToggleButtonsWidget(),
             ],
           ),
           const SizedBox(height: 12),
-          const SizedBox(
+          SizedBox(
             height: 160,
-            child: LineChartWidget(),
+            child: LineChartWidget(
+              transacoes: transacoes,
+              contas: contas,
+            ),
           ),
           const SizedBox(height: 6),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               LegendDot(
-                color: const Color(0xFF00C853),
+                color: Color(0xFF00C853),
                 label: 'Entradas',
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               LegendDot(
-                color: const Color(0xFFFF5252),
+                color: Color(0xFFFF5252),
                 label: 'Saídas',
               ),
             ],

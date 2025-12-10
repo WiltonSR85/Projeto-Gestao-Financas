@@ -35,25 +35,36 @@ class BalanceCard extends StatelessWidget {
             'Saldo Total',
             style: TextStyle(
               color: Colors.white.withOpacity(0.95),
+              fontSize: 14,
             ),
           ),
           const SizedBox(height: 8),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                balance,
-                style: const TextStyle(
-                  fontSize: 34,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              Expanded(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    balance,
+                    style: const TextStyle(
+                      fontSize: 34,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(width: 10),
-              Text(
-                percentageChange,
-                style: TextStyle(
-                  color: Colors.white.withOpacity(0.95),
+              Flexible(
+                child: Text(
+                  percentageChange,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.95),
+                    fontSize: 12,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],

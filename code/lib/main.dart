@@ -8,8 +8,19 @@ import 'views/theme/app_theme.dart';
 import 'views/screens/profile_page.dart';
 import 'views/screens/accounts/accounts_page.dart';
 import 'views/screens/accounts/account_detail_page.dart';
+import 'database/database_helper.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // FORÇA A DELEÇÃO DO BANCO
+  try {
+    await DatabaseHelper().deleteDatabaseDebug();
+    print('✅ Banco deletado com sucesso');
+  } catch (e) {
+    print('⚠️ Erro ao deletar banco: $e');
+  }
+  
   runApp(const MyApp());
 }
 

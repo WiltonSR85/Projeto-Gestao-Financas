@@ -44,4 +44,30 @@ class TransactionModel {
       idCategoria: map['id_categoria'] as int? ?? 0,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id_transacao': idTransacao,
+      'tipo': tipo,
+      'valor': valor,
+      'data': data,
+      'descricao': descricao,
+      'recorrente': recorrente,
+      'id_conta': idConta,
+      'id_categoria': idCategoria,
+    };
+  }
+
+  factory TransactionModel.fromJson(Map<String, dynamic> json) {
+    return TransactionModel(
+      idTransacao: json['id_transacao'] as int?,
+      tipo: json['tipo'] as String? ?? '',
+      valor: (json['valor'] as num?)?.toDouble() ?? 0.0,
+      data: json['data'] as String? ?? '',
+      descricao: json['descricao'] as String? ?? '',
+      recorrente: json['recorrente'] as bool? ?? false,
+      idConta: json['id_conta'] as int? ?? 0,
+      idCategoria: json['id_categoria'] as int? ?? 0,
+    );
+  }
 }
