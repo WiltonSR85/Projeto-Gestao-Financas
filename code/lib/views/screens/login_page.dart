@@ -156,15 +156,6 @@ class _LoginPageState extends State<LoginPage> {
                         child: const Text('Não tem conta? Crie agora', style: TextStyle(decoration: TextDecoration.underline)),
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    // botão de debug (remova em produção)
-                    Center(
-                      child: TextButton(
-                        onPressed: () {} /*_debugListUsers*/,
-                        style: TextButton.styleFrom(foregroundColor: Colors.white54),
-                        child: const Text('DEBUG: listar usuários (console)'),
-                      ),
-                    ),
                   ],
                 ),
               ),

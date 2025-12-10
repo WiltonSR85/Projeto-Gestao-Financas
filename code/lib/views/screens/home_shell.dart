@@ -33,8 +33,6 @@ class _HomeShellState extends State<HomeShell> {
           NavigationDestination(icon: Icon(Icons.chat_outlined), label: 'Chat IA'),
           NavigationDestination(icon: Icon(Icons.category_outlined), label: 'Categorias'),
           NavigationDestination(icon: Icon(Icons.account_balance_outlined), label: 'Contas'),
-          NavigationDestination(icon: Icon(Icons.person_outlined), label: 'Perfil'),
-
         ],
         backgroundColor: Colors.black.withOpacity(0.25),
       ),
