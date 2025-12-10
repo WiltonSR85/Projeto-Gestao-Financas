@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
-import 'categories_page.dart';
+import 'profile_page.dart';
+import 'category/category_page.dart';
 import 'accounts/accounts_page.dart';
 import 'chat_page.dart';
 
@@ -18,6 +19,7 @@ class _HomeShellState extends State<HomeShell> {
     ChatPage(),
     CategoriesPage(),
     AccountsPage(),
+    ProfilePage(),
   ];
 
   @override
@@ -33,6 +35,8 @@ class _HomeShellState extends State<HomeShell> {
           NavigationDestination(icon: Icon(Icons.chat_outlined), label: 'Chat IA'),
           NavigationDestination(icon: Icon(Icons.category_outlined), label: 'Categorias'),
           NavigationDestination(icon: Icon(Icons.account_balance_outlined), label: 'Contas'),
+          NavigationDestination(icon: Icon(Icons.person_outlined), label: 'Perfil'),
+
         ],
         backgroundColor: Colors.black.withOpacity(0.25),
       ),

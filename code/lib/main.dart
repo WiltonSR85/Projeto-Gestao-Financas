@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'views/screens/login_page.dart';
-import 'views/screens/home_shell.dart';
+import 'views/screens/home_shell.dart'; 
 import 'views/screens/chat_page.dart';
 import 'views/screens/register_page.dart';
 import 'views/theme/app_theme.dart';
